@@ -1,6 +1,8 @@
 import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
 import Offers from "./components/Offers";
+import Products from "./components/Products";
+import Story from "./components/Story";
 
 const App = () => {
   return (
@@ -10,6 +12,8 @@ const App = () => {
         <Hero />
       </div>
       <Offers />
+      <Products />
+      <Story />
     </div>
   );
 };
