@@ -5,7 +5,7 @@ export default function Navbar() {
   const [searchOpen, setSearchOpen] = useState(false);
 
   return (
-    <nav className="px-6 md:px-10 py-5 text-white">
+    <nav className="px-6 md:px-[15rem] py-5 text-white">
       <div className="flex items-center justify-between">
         {/* LOGO */}
         <h1 className="text-2xl font-bold">Khadyo</h1>

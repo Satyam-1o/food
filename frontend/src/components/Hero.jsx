@@ -3,14 +3,14 @@ export default function Hero() {
     <section className="relative px-6 md:px-12 py-16  overflow-hidden">
       {/* LEFT DECOR IMAGE */}
       <img
-        src="/left-food.avif"
+        src="/images/left-food.avif"
         alt=""
         className="hidden md:block absolute left-0 top-10 w-40 lg:w-56 object-contain pointer-events-none opacity-80"
       />
 
       {/* RIGHT DECOR IMAGE */}
       <img
-        src="/right-food.avif"
+        src="/images/right-food.avif"
         alt=""
         className="hidden md:block absolute right-0 top-10 w-40 lg:w-56 object-contain pointer-events-none opacity-80"
       />
