@@ -13,7 +13,7 @@ export default function Navbar() {
 
   const links = [
     { name: "Home", path: "/" },
-    { name: "Menu", path: "/" }, // you can change later
+    { name: "Menu", path: "/menu" }, // you can change later
     { name: "Services", path: "/" },
     { name: "Contact", path: "/" },
   ];
@@ -36,7 +36,7 @@ export default function Navbar() {
               className={`transition cursor-pointer ${
                 location.pathname === item.path
                   ? "text-black font-semibold"
-                  : "hover:text-white/80"
+                  : "hover:text-[#F375C2]"
               }`}
             >
               {item.name}
