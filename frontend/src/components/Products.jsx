@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
 import { getMenu } from "../api/menuApi";
+import { useCart } from "../context/CartContext";
 
 export default function Products() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const { addToCart } = useCart();
 
   useEffect(() => {
     const fetchMenu = async () => {
@@ -60,6 +63,7 @@ export default function Products() {
               <span className="font-bold">{item.price}</span>
 
               <button
+                onClick={() => addToCart(item)}
                 className={`w-8 h-8 flex items-center justify-center rounded ${
                   item.highlight
                     ? "bg-white text-[#4D2FB2]"

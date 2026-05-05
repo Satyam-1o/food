@@ -21,7 +21,7 @@ export default function Hero() {
           <p className="font-semibold mb-3 opacity-90">Welcome</p>
 
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
-            Enjoy Your <span className="text-white">Delicious</span> Food
+            Enjoy Your <span className="text-[#4D2FB2]">Delicious</span> Food
           </h1>
 
           <p className="mt-4 text-sm sm:text-base leading-relaxed opacity-90">
@@ -30,7 +30,7 @@ export default function Hero() {
           </p>
 
           <div className="mt-6 flex justify-center lg:justify-start">
-            <button className="bg-white text-[#4D2FB2] px-6 py-3 rounded-full hover:bg-gray-100 transition font-semibold w-full sm:w-auto">
+            <button className="bg-[#FFDBFD] font-semibold text-[#4D2FB2] px-6 py-3 rounded-full hover:bg-[#F375C2] transition font-semibold w-full sm:w-auto">
               Order Now
             </button>
           </div>
@@ -45,9 +45,9 @@ export default function Hero() {
           ].map((item, i) => (
             <div
               key={i}
-              className="flex items-center gap-3 bg-white/10 backdrop-blur-md p-3 sm:p-4 rounded-xl border border-white/20 hover:bg-white/20 transition"
+              className="flex items-center gap-3 bg-[#F375C2]/10 backdrop-blur-md p-3 sm:p-4 rounded-xl border border-white/20 hover:bg-[#FFDBFD]/20 transition"
             >
-              <div className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center bg-white/20 rounded-full">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center bg-[#4D2FB2]/25 rounded-full">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="w-4 h-4 sm:w-5 sm:h-5 text-white"

@@ -1,20 +1,25 @@
-import Hero from "./components/Hero";
+import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Offers from "./components/Offers";
-import Products from "./components/Products";
-import Story from "./components/Story";
+import Home from "./pages/Home";
+import Cart from "./pages/Cart";
 
 const App = () => {
   return (
     <div>
-      <div className="bg-gradient-to-br from-[#4D2FB2] via-[#B153D7] to-[#F375C2] text-white">
+
+      {/* Navbar stays global */}
+      <div className="">
         <Navbar />
-        <Hero />
       </div>
-      <Offers />
-      <Products />
-      <Story />
+
+      {/* Routes */}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/cart" element={<Cart />} />
+      </Routes>
+
     </div>
   );
 };
+
 export default App;
