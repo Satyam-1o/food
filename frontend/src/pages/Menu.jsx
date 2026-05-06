@@ -35,6 +35,7 @@ export default function Menu() {
       behavior: "smooth",
       block: "start",
     });
+    setActiveCategory(category)
   };
 
   // ACTIVE CATEGORY ON SCROLL
@@ -69,12 +70,12 @@ export default function Menu() {
 
       {/* STICKY CATEGORY NAV */}
       <div className="fixed bottom-4 left-0 w-full z-50 px-4">
-        <div className="max-w-3xl mx-auto bg-white shadow-lg rounded-full px-3 py-2 flex gap-3 overflow-x-auto">
+        <div className="max-w-[35rem] mx-auto bg-white shadow-lg rounded-full px-3 py-2 max-md:px-2 max-md:py-1 justify-center flex gap-3 max-md:gap-2 overflow-x-auto">
           {categories.map((category) => (
             <button
               key={category}
               onClick={() => scrollToCategory(category)}
-              className={`whitespace-nowrap px-4 py-1.5 rounded-full text-sm font-medium transition ${
+              className={`whitespace-nowrap px-4 py-1.5 max-md:px-2 rounded-full text-lg max-md:text-sm font-medium transition ${
                 activeCategory === category
                   ? "bg-[#4D2FB2] text-white"
                   : "bg-gray-100 text-gray-700"

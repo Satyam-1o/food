@@ -18,7 +18,7 @@ const menuSchema = new mongoose.Schema(
     },
     category: {
       type: String,
-      enum: ["burger", "pizza", "drinks", "chicken", "other"],
+      enum: ["burger", "pizza", "drinks", "fries", "other"],
       default: "other",
     },
     available: {

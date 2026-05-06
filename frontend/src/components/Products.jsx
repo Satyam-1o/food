@@ -9,6 +9,12 @@ export default function Products() {
 
   const { addToCart } = useCart();
 
+  const selectedIds = ["69fa3e4a485a65920fec48bb", "69fb4deb485a65920fec4904", "69fb771a9f5e9237bac96246", "69fb7af09f5e9237bac96254"];
+
+  const filteredProducts = products.filter((item) =>
+    selectedIds.includes(item._id),
+  );
+
   useEffect(() => {
     const fetchMenu = async () => {
       try {
@@ -43,19 +49,24 @@ export default function Products() {
 
       {/* GRID */}
       <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {products.map((item, i) => (
+        {filteredProducts.map((item, i) => (
           <div
             key={i}
             className={`relative p-4 rounded-md transition hover:shadow-lg cursor-pointer flex flex-col h-full`}
           >
             {/* IMAGE */}
-            <img src={item.image} className="w-full h-50 object-contain mx-auto mb-3" />
+            <img
+              src={item.image}
+              className="w-full h-50 object-contain mx-auto mb-3"
+            />
 
             {/* TITLE */}
             <h3 className="font-semibold h-15 max-md:text-sm">{item.name}</h3>
 
             {/* DESCRIPTION */}
-            <p className="text-xs mt-1 opacity-70 ">{(item.description).slice(0, 50)}</p>
+            <p className="text-xs mt-1 opacity-70 ">
+              {item.description.slice(0, 50)}
+            </p>
 
             {/* PRICE + BUTTON */}
             <div className="flex justify-between items-center mt-auto ">
