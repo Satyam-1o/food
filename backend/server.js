@@ -5,6 +5,8 @@ import connectDB from "./config/db.js";
 import menuRoutes from "./routes/menuRoutes.js";
 import errorHandler from "./middleware/errorMiddleware.js";
 import orderRoutes from "./routes/orderRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
+
 
 connectDB();
 
@@ -18,6 +20,7 @@ app.use(express.json());
 
 app.use("/api/menu", menuRoutes);
 app.use("/api/orders", orderRoutes);
+app.use("/api/auth", authRoutes);
 app.use(errorHandler);
 
 app.get("/", (req, res) => {

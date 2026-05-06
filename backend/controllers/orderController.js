@@ -12,10 +12,10 @@ export const createOrder = async (req, res, next) => {
     const order = await Order.create({
       items,
       totalPrice,
+      user: req.user._id,
     });
 
     res.status(201).json(order);
-
   } catch (error) {
     next(error);
   }
