@@ -1,42 +1,53 @@
 import { useState } from "react";
 import { useCart } from "../context/CartContext";
 import { Link, useLocation } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
 
   const { cart } = useCart();
-  const totalItems = cart.reduce((acc, item) => acc + item.qty, 0);
+  const { user } = useAuth();
 
+  const totalItems = cart.reduce((acc, item) => acc + item.qty, 0);
   const location = useLocation();
 
   const links = [
     { name: "Home", path: "/" },
-    { name: "Menu", path: "/menu" }, // you can change later
-    { name: "Services", path: "/" },
+    { name: "Menu", path: "/menu" },
     { name: "Contact", path: "/" },
   ];
 
+  const getFirstName = (name) => {
+    if (!name) return "";
+    return name.split(" ")[0];
+  };
+
+  const getInitial = (name) => {
+    if (!name) return "";
+    return name[0].toUpperCase();
+  };
+
   return (
-    <nav className="w-full px-6 md:px-[15rem] py-5 text-black bg-gray-50 shadow-sm">
-      <div className="flex items-center justify-between">
+    <nav className="sticky top-0 z-50 backdrop-blur-md bg-white/80 border-b border-gray-200">
+
+      <div className="max-w-7xl mx-auto px-6 md:px-12 py-4 flex items-center justify-between">
 
         {/* LOGO */}
-        <Link to="/" className="text-2xl font-bold">
+        <Link to="/" className="text-2xl font-bold text-[#4D2FB2]">
           Khadyo
         </Link>
 
-        {/* DESKTOP LINKS */}
-        <div className="hidden md:flex gap-10 font-medium">
+        {/* LINKS */}
+        <div className="hidden md:flex items-center gap-8 text-sm font-medium">
           {links.map((item) => (
             <Link
               key={item.name}
               to={item.path}
-              className={`transition cursor-pointer ${
+              className={`transition ${
                 location.pathname === item.path
                   ? "text-black font-semibold"
-                  : "hover:text-[#F375C2]"
+                  : "text-gray-600 hover:text-black"
               }`}
             >
               {item.name}
@@ -44,58 +55,79 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* RIGHT */}
+        {/* RIGHT SIDE */}
         <div className="flex items-center gap-4">
 
-          {/* SEARCH */}
-          <div className="relative flex items-center">
-            <input
-              type="text"
-              placeholder="Search..."
-              className={`absolute right-0 ${
-                searchOpen ? "w-32 md:w-40 opacity-100" : "w-0 opacity-0"
-              } transition-all duration-300 px-3 py-2 border border-white/30 rounded-full bg-white/20 backdrop-blur-md text-white placeholder-white/70 focus:outline-none`}
-            />
-
-            <button
-              onClick={() => setSearchOpen((prev) => !prev)}
-              className="p-3 rounded-full hover:bg-white/20 transition"
+          {/* SIGN IN / PROFILE */}
+          {!user ? (
+            <Link
+              to="/login"
+              className="px-4 py-1.5 border border-[#4D2FB2] text-[#4D2FB2] rounded-full text-sm font-medium hover:bg-[#4D2FB2] hover:text-white transition"
             >
-              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <circle cx="11" cy="11" r="8" strokeWidth="2" />
-                <line x1="21" y1="21" x2="16.65" y2="16.65" strokeWidth="2" />
-              </svg>
-            </button>
-          </div>
+              Sign In
+            </Link>
+          ) : (
+            <Link
+              to="/profile"
+              className="flex items-center gap-2 px-2 py-1 rounded-full hover:bg-gray-100 transition"
+            >
+              <div className="w-8 h-8 rounded-full bg-[#4D2FB2] text-white flex items-center justify-center text-sm font-semibold">
+                {getInitial(user.name)}
+              </div>
+
+              <span className="hidden md:block text-sm font-medium text-gray-700">
+                {getFirstName(user.name)}
+              </span>
+            </Link>
+          )}
 
           {/* CART */}
-          <Link to="/cart" className="relative cursor-pointer">
-            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5" />
-            </svg>
+          <Link to="/cart" className="relative group">
+            <div className="p-2 rounded-full hover:bg-gray-100 transition">
+              <svg
+                className="h-5 w-5 text-gray-700"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeWidth="2"
+                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5"
+                />
+              </svg>
+            </div>
 
-            <span className="absolute -top-2 -right-2 bg-[#F375C2] text-xs px-1.5 py-0.5 rounded-full">
-              {totalItems}
-            </span>
+            {totalItems > 0 && (
+              <span className="absolute -top-1 -right-1 bg-[#F375C2] text-white text-[10px] px-1.5 py-0.5 rounded-full">
+                {totalItems}
+              </span>
+            )}
           </Link>
 
           {/* HAMBURGER */}
           <button
-            className="md:hidden p-2"
+            className="md:hidden p-2 rounded hover:bg-gray-100 transition"
             onClick={() => setMenuOpen((prev) => !prev)}
           >
-            {menuOpen ? (
-              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <line x1="18" y1="6" x2="6" y2="18" strokeWidth="2" />
-                <line x1="6" y1="6" x2="18" y2="18" strokeWidth="2" />
-              </svg>
-            ) : (
-              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <line x1="4" y1="6" x2="20" y2="6" strokeWidth="2" />
-                <line x1="4" y1="12" x2="20" y2="12" strokeWidth="2" />
-                <line x1="4" y1="18" x2="20" y2="18" strokeWidth="2" />
-              </svg>
-            )}
+            <svg
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              {menuOpen ? (
+                <>
+                  <line x1="18" y1="6" x2="6" y2="18" strokeWidth="2" />
+                  <line x1="6" y1="6" x2="18" y2="18" strokeWidth="2" />
+                </>
+              ) : (
+                <>
+                  <line x1="4" y1="6" x2="20" y2="6" strokeWidth="2" />
+                  <line x1="4" y1="12" x2="20" y2="12" strokeWidth="2" />
+                  <line x1="4" y1="18" x2="20" y2="18" strokeWidth="2" />
+                </>
+              )}
+            </svg>
           </button>
 
         </div>
@@ -104,22 +136,23 @@ export default function Navbar() {
       {/* MOBILE MENU */}
       <div
         className={`md:hidden overflow-hidden transition-all duration-300 ${
-          menuOpen ? "max-h-60 mt-4" : "max-h-0"
+          menuOpen ? "max-h-60 border-t" : "max-h-0"
         }`}
       >
-        <div className="flex flex-col gap-4 bg-white/10 backdrop-blur-md p-4 rounded-xl font-medium">
+        <div className="flex flex-col gap-4 px-6 py-4 bg-white text-sm">
+
           {links.map((item) => (
             <Link
               key={item.name}
               to={item.path}
               onClick={() => setMenuOpen(false)}
-              className="hover:text-white/80"
             >
               {item.name}
             </Link>
           ))}
         </div>
       </div>
+
     </nav>
   );
 }

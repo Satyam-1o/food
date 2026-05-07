@@ -10,17 +10,15 @@ const orderSchema = new mongoose.Schema(
         image: String,
       },
     ],
-    totalPrice: {
-      type: Number,
+    totalPrice: Number,
+
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
       required: true,
-    },
-    status: {
-      type: String,
-      default: "pending",
     },
   },
   { timestamps: true }
 );
 
-const Order = mongoose.model("Order", orderSchema);
-export default Order;
+export default mongoose.model("Order", orderSchema);

@@ -7,13 +7,17 @@ import Menu from "./pages/Menu";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Profile from "./pages/Profile";
+import ScrollToTop from "./components/ScrollToTop";
+
 const App = () => {
   return (
     <div>
+
+      <ScrollToTop />
+
       {/* Navbar stays global */}
-      <div className="">
         <Navbar />
-      </div>
 
       {/* Routes */}
       <Routes>
@@ -22,14 +26,18 @@ const App = () => {
         <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-
-
         <Route
           path="/checkout"
           element={
             <ProtectedRoute>
               <Checkout />
             </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+                <Profile />
           }
         />
       </Routes>

@@ -1,6 +1,6 @@
 export default function Hero() {
   return (
-    <section className="relative px-6 md:px-12 py-36 overflow-hidden">
+    <section className="relative px-6 md:px-12 py-36 max-md:py-10 overflow-hidden">
       {/* LEFT DECOR IMAGE */}
       <img
         src="/images/left-food.avif"
