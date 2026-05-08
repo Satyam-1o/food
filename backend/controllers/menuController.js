@@ -15,7 +15,7 @@ const uploadToCloudinary = (buffer) => {
       }
     );
 
-    stream.end(buffer); // ✅ important fix
+    stream.end(buffer); // important fix
   });
 };
 
